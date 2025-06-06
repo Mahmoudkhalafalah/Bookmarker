@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pacifico&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pacifico&family=Righteous&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Bookmarker</title>
+</head>
+
+<body>
+    <Main class="py-5 vh-100">
+        <div class="container text-center">
+            <h1 class="title py-2">Bookmarker</h1>
+            <div class="main-content py-4 p-3 mt-5">
+                <h2>
+                    Bookmark your favourite sites
+                </h2>
+                <div class="book-entry d-flex flex-column gap-4 mt-5">
+                    <div class="site-name position-relative">
+                        <label class="fw-semibold pb-2" for="site-name">Site Name</label>
+                        <i id="siteNameErrorIcon" class="bi bi-exclamation-circle end-0 d-none error-icon"></i>
+                        <i id="siteNameGoodIcon" class="bi bi-check end-0 d-none good-icon "></i>
+                        <input onkeyup="textInputCheck()" class="w-100 rounded py-2 px-3" type="text" placeholder="Bookmark Name" id="siteName">
+                    </div>
+                    <div class="site-url position-relative">
+                        <label class="fw-semibold pb-2" for="site-url">Site URL</label>
+                        <i id="siteUrlErrorIcon" class="bi bi-exclamation-circle end-0 d-none error-icon"></i>
+                        <i id="siteUrlGoodIcon" class="bi bi-check end-0 d-none good-icon "></i>
+                        <input onkeyup="urlInputCheck()" class="w-100 rounded py-2 px-3" type="text" placeholder="Website URL" name="site-url" id="siteUrl">
+                    </div>
+                    <button onclick="addBook()" class="btn btn-submit align-self-center">Submit</button>
+                </div>
+            </div>
+            <div class="books-list mt-4">
+                <table class="w-100 bg-white">
+                    <thead>
+                        <tr>
+                            <th>Index</th>
+                            <th>Website Name</th>
+                            <th>Visit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Name</td>
+                            <td><button class="btn btn-visit"><i class="fa-solid fa-eye"></i> Visit</button></td>
+                            <td><button class="btn btn-delete"><i class="fa-solid fa-trash"></i> Delete</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </Main>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
