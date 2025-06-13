@@ -4,7 +4,9 @@ var siteUrlErrorIcon = document.getElementById("siteUrlErrorIcon");
 var siteUrlGoodIcon = document.getElementById("siteUrlGoodIcon");
 var siteNameErrorIcon = document.getElementById("siteNameErrorIcon");
 var siteNameGoodIcon = document.getElementById("siteNameGoodIcon");
-var books = []
+var booksDisplayArea = document.getElementById("tableBody");
+var books =  (JSON.parse(localStorage.getItem("booksData")))??[]
+displayBooks();
 var validBook = false
 console.log("connected");
 function isValidUrl(string) {
@@ -65,10 +67,26 @@ function addBook(){
             bookUrl : siteUrlInput.value
         }
         books.push(book);
+        localStorage.setItem("booksData",JSON.stringify(books));
         console.log(books);
+        displayBooks();
     }
     else{
         
     }
+}
+
+function displayBooks(){
+    var booksdataContainer='';
+
+    for(var i = 0; i <books.length; i++){
+        booksdataContainer += `<tr>
+                            <td>${i+1}</td>
+                            <td>${books[i].bookName}</td>
+                            <td><a target="_blank" href="https://${books[i].bookUrl}"><button class="btn btn-visit"><i class="fa-solid fa-eye"></i> Visit</button></a></td>
+                            <td><button class="btn btn-delete"><i class="fa-solid fa-trash"></i> Delete</button></td>
+                        </tr>`
+    }
+    booksDisplayArea.innerHTML = booksdataContainer;
 }
 
