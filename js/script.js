@@ -5,10 +5,11 @@ var siteUrlGoodIcon = document.getElementById("siteUrlGoodIcon");
 var siteNameErrorIcon = document.getElementById("siteNameErrorIcon");
 var siteNameGoodIcon = document.getElementById("siteNameGoodIcon");
 var booksDisplayArea = document.getElementById("tableBody");
+var errorPopUpDialog = document.getElementById("errorPopUpDialog");
 var books =  (JSON.parse(localStorage.getItem("booksData")))??[]
 displayBooks();
 var validBook = false
-console.log("connected");
+
 function isValidUrl(string) {
     const pattern = new RegExp(
         '^([a-zA-Z]+:\\/\\/)?' + // protocol
@@ -61,6 +62,7 @@ function textInputCheck() {
 }
 
 function addBook(){
+
     if(validBook){
         var book = {
             bookName : siteNameInput.value,
@@ -72,7 +74,9 @@ function addBook(){
         displayBooks();
     }
     else{
-        
+
+        errorPopUpDialog.classList.remove("d-none");
+        errorPopUpDialog.classList.add("d-block");
     }
 }
 
@@ -84,9 +88,19 @@ function displayBooks(){
                             <td>${i+1}</td>
                             <td>${books[i].bookName}</td>
                             <td><a target="_blank" href="https://${books[i].bookUrl}"><button class="btn btn-visit"><i class="fa-solid fa-eye"></i> Visit</button></a></td>
-                            <td><button class="btn btn-delete"><i class="fa-solid fa-trash"></i> Delete</button></td>
+                            <td><button onclick="removeBook(${i})" class="btn btn-delete"><i class="fa-solid fa-trash"></i> Delete</button></td>
                         </tr>`
     }
     booksDisplayArea.innerHTML = booksdataContainer;
 }
 
+function removeBook(bookIndex){
+    books.splice(bookIndex,1);
+    displayBooks();
+    localStorage.setItem("booksData",JSON.stringify(books));
+}
+
+function dismissDialog(){
+    errorPopUpDialog.classList.remove("d-block");
+    errorPopUpDialog.classList.add("d-none");
+}

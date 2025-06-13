@@ -140,3 +140,36 @@ label[for="site-url"]::before {
     --bs-btn-hover-bg: #d30820;
     --bs-btn-hover-border-color: #ba081d;
 }
+.error-dialog{
+    
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.295);
+}
+.message-container{
+
+    border-radius: 5px;
+    width: 40%;
+
+}
+.message-container p{
+    font-family: "Bree Serif", serif;
+    font-size: 21px;
+    line-height: 1.3;
+    color: #352e28;
+}
+.circle{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+.icons-container{
+    cursor: pointer;
+}
+.message-container ul i{
+    color: #d1512d ;
+}
+.message-container ul li{
+    font-family: inherit;
+    font-size: 18px;
+    padding-top: 10px;
+}
