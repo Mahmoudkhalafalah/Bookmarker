@@ -6,7 +6,7 @@ var siteNameErrorIcon = document.getElementById("siteNameErrorIcon");
 var siteNameGoodIcon = document.getElementById("siteNameGoodIcon");
 var booksDisplayArea = document.getElementById("tableBody");
 var errorPopUpDialog = document.getElementById("errorPopUpDialog");
-var books =  (JSON.parse(localStorage.getItem("booksData")))??[]
+var books = (JSON.parse(localStorage.getItem("booksData"))) ?? []
 displayBooks();
 var validBook = false
 
@@ -37,7 +37,7 @@ function urlInputCheck() {
     }
     else {
         siteUrlInput.classList.add("good");
-        siteUrlInput.classList.remove("remove");
+        siteUrlInput.classList.remove("error");
         siteUrlErrorIcon.classList.add("d-none");
         siteUrlGoodIcon.classList.remove("d-none");
         validBook = true;
@@ -54,38 +54,40 @@ function textInputCheck() {
     }
     else {
         siteNameInput.classList.add("good");
-        siteNameInput.classList.remove("remove");
+        siteNameInput.classList.remove("error");
         siteNameErrorIcon.classList.add("d-none");
         siteNameGoodIcon.classList.remove("d-none");
         validBook = true;
     }
 }
 
-function addBook(){
+function addBook() {
 
-    if(validBook){
+    if (validBook) {
         var book = {
-            bookName : siteNameInput.value,
-            bookUrl : siteUrlInput.value
+            bookName: siteNameInput.value,
+            bookUrl: siteUrlInput.value
         }
         books.push(book);
-        localStorage.setItem("booksData",JSON.stringify(books));
+        localStorage.setItem("booksData", JSON.stringify(books));
         console.log(books);
         displayBooks();
+        clearInputs();
+
     }
-    else{
+    else {
 
         errorPopUpDialog.classList.remove("d-none");
         errorPopUpDialog.classList.add("d-block");
     }
 }
 
-function displayBooks(){
-    var booksdataContainer='';
+function displayBooks() {
+    var booksdataContainer = '';
 
-    for(var i = 0; i <books.length; i++){
+    for (var i = 0; i < books.length; i++) {
         booksdataContainer += `<tr>
-                            <td>${i+1}</td>
+                            <td>${i + 1}</td>
                             <td>${books[i].bookName}</td>
                             <td><a target="_blank" href="https://${books[i].bookUrl}"><button class="btn btn-visit"><i class="fa-solid fa-eye"></i> Visit</button></a></td>
                             <td><button onclick="removeBook(${i})" class="btn btn-delete"><i class="fa-solid fa-trash"></i> Delete</button></td>
@@ -94,13 +96,21 @@ function displayBooks(){
     booksDisplayArea.innerHTML = booksdataContainer;
 }
 
-function removeBook(bookIndex){
-    books.splice(bookIndex,1);
+function clearInputs() {
+    siteUrlInput.value = "";
+    siteNameInput.value = "";
+    siteNameInput.classList.remove("good");
+    siteUrlInput.classList.remove("good");
+    siteNameGoodIcon.classList.add("d-none");
+    siteUrlGoodIcon.classList.add("d-none");
+}
+function removeBook(bookIndex) {
+    books.splice(bookIndex, 1);
     displayBooks();
-    localStorage.setItem("booksData",JSON.stringify(books));
+    localStorage.setItem("booksData", JSON.stringify(books));
 }
 
-function dismissDialog(){
+function dismissDialog() {
     errorPopUpDialog.classList.remove("d-block");
     errorPopUpDialog.classList.add("d-none");
 }
